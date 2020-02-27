@@ -25,7 +25,7 @@ namespace ComunioBonus
 
         private static async Task Main()
         {
-            Console.WriteLine("Comunio Bot");
+            Console.WriteLine("Comunio Bonus");
 
             InitializeConfig();
 
@@ -40,9 +40,9 @@ namespace ComunioBonus
             var lines = playerPoints.Select(
                 p => $"{p.Name},{p.Points},{p.Points * _multiplier},{p.Points} Punkte,{p.Id}");
 
-            await File.WriteAllLinesAsync("comuniobot_points.csv", lines);
+            await File.WriteAllLinesAsync("ComunioBonus_Points.csv", lines);
 
-            await AddBonus(playerPoints);
+            // await AddBonus(playerPoints);
 
             Console.WriteLine("All finished!");
         }

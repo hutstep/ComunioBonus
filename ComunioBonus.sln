@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComunioBot", "ComunioBot\ComunioBot.csproj", "{3799F26A-0CD5-460F-BD55-3D08E28F4258}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComunioBonus", "ComunioBonus\ComunioBonus.csproj", "{3799F26A-0CD5-460F-BD55-3D08E28F4258}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

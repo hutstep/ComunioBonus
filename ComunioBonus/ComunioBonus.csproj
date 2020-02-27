@@ -5,7 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>ComunioBonus</AssemblyName>
     <RootNamespace>ComunioBonus</RootNamespace>
-    <Authors>Stephan Hüttner</Authors>
+    <Authors>hutstep</Authors>
     <Description>Fetch Comunio points and add bonus.</Description>
   </PropertyGroup>
 
