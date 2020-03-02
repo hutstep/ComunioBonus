@@ -62,6 +62,11 @@ namespace ComunioBonus
 
             foreach (var user in users)
             {
+                if (user.Points == 0)
+                {
+                    continue;
+                }
+
                 try
                 {
                     var postParams = new List<KeyValuePair<string, string>>
@@ -78,7 +83,7 @@ namespace ComunioBonus
                         new FormUrlEncodedContent(postParams));
 
                     response.EnsureSuccessStatusCode();
-                    
+
                     Console.WriteLine($"{user.Name} - {user.Points} points - {user.Points * _multiplier} bonus - SUCCESSFUL");
                 }
                 catch (HttpRequestException e)
@@ -109,7 +114,12 @@ namespace ComunioBonus
                 var playerPoints = playerNodes.Select(tr =>
                 {
                     var name = tr.FirstChild.NextSibling.InnerText.Trim();
-                    var points = int.Parse(tr.LastChild.InnerText.Trim());
+
+                    if (!int.TryParse(tr.LastChild.InnerText.Trim(), out var points))
+                    {
+                        points = 0;
+                    }
+
                     var idRaw = tr.FirstChild.NextSibling.FirstChild.Attributes.First(a => a.Name == "href").Value;
                     var id = int.Parse(Regex.Replace(idRaw, @".*pid=", "").Trim());
 
