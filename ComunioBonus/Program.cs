@@ -23,9 +23,9 @@ namespace ComunioBonus
 
         private static IConfiguration _configuration;
 
-        private static async Task Main()
+        private static async Task Main(string[] args)
         {
-            Console.WriteLine("Comunio Bonus");
+            Console.WriteLine($"Comunio Bonus{Environment.NewLine}============={Environment.NewLine}");
 
             InitializeConfig();
 
@@ -33,16 +33,34 @@ namespace ComunioBonus
 
             InitializeHttpClient();
 
+            Console.WriteLine("Logging in to Comunio");
             await LogIn();
+            Console.WriteLine($"Logging in to Comunio successfull{Environment.NewLine}");
 
+            Console.WriteLine("Fetching points");
             var playerPoints = (await FetchPoints()).ToList();
+            Console.WriteLine($"Fetching points successful{Environment.NewLine}");
+
+            Console.WriteLine("{0,-20}{1,5}\n", "Name", "Points");
+
+            playerPoints.ForEach(pp => Console.WriteLine("{0,-20}{1,5}", pp.Name, pp.Points));
 
             var lines = playerPoints.Select(
                 p => $"{p.Name},{p.Points},{p.Points * _multiplier},{p.Points} Punkte,{p.Id}");
 
+            Console.WriteLine($"{Environment.NewLine}Writing data to ComunioBonus_Points.csv");
             await File.WriteAllLinesAsync("ComunioBonus_Points.csv", lines);
+            Console.WriteLine($"Writing data to ComunioBonus_Points.csv successful{Environment.NewLine}");
 
-            // await AddBonus(playerPoints);
+
+            var addBonus = args.ElementAtOrDefault(0);
+
+            if (addBonus != null && addBonus.Equals("addbonus", StringComparison.OrdinalIgnoreCase))
+            {
+                Console.WriteLine($"Adding bonus to players{Environment.NewLine}");
+                await AddBonus(playerPoints);
+                Console.WriteLine($"{Environment.NewLine}Adding bonus to players successful{Environment.NewLine}");
+            }
 
             Console.WriteLine("All finished!");
         }
