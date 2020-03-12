@@ -80,7 +80,7 @@ namespace ComunioBonus
 
             foreach (var user in users)
             {
-                if (user.Points == 0)
+                if (user.Points <= 0)
                 {
                     continue;
                 }
